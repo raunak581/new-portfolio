@@ -18,6 +18,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
         context,
         duration: const Duration(milliseconds: 500), // Smooth scroll duration
         curve: Curves.easeInOut,
+        alignment: 0.8,
       );
     }
   }
