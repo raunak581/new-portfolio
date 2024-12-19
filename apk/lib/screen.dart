@@ -9,7 +9,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _homeSectionKey = GlobalKey();
   final GlobalKey _aboutSectionKey = GlobalKey();
-  final GlobalKey _thirdSectionKey = GlobalKey();
+  final GlobalKey _serviceSectionKey = GlobalKey();
+  final GlobalKey _fourthSectionKey = GlobalKey();
 
   void _scrollToSection(GlobalKey key) {
     final context = key.currentContext;
@@ -228,7 +229,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
                   //third section
                   Padding(
-                    key: _thirdSectionKey,
+                    key: _fourthSectionKey,
                     padding: const EdgeInsets.symmetric(
                         vertical: 40, horizontal: 60),
                     child: Row(
@@ -338,6 +339,75 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                         ),
                       ],
                     ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Column(
+                    key: _serviceSectionKey,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Title Section
+                      Text(
+                        "SERVICES OFFERS",
+                        style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        "Is give may shall likeness made yielding spirit a itself togeth created after sea\n"
+                        "is in beast beginning signs open god you're gathering ithe",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20, color: Colors.grey),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      // Grid Section
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: GridView.count(
+                          crossAxisCount:
+                              4, // Adjust based on the number of columns
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          shrinkWrap:
+                              true, // Ensures the GridView doesn't expand infinitely
+                          physics:
+                              NeverScrollableScrollPhysics(), // Disables scrolling
+                          children: [
+                            _buildServiceTile(
+                              icon: Icons.mouse,
+                              title: "WP DEVELOPING",
+                              description:
+                                  "Creeping for female light years that lesser can't evening heaven isn't bearing tree",
+                            ),
+                            _buildServiceTile(
+                              icon: Icons.design_services,
+                              title: "UI/UX DESIGN",
+                              description:
+                                  "Creeping for female light years that lesser can't evening heaven isn't bearing tree",
+                            ),
+                            _buildServiceTile(
+                              icon: Icons.web,
+                              title: "WEB DESIGN",
+                              description:
+                                  "Creeping for female light years that lesser can't evening heaven isn't bearing tree",
+                            ),
+                            _buildServiceTile(
+                              icon: Icons.rocket_launch,
+                              title: "SEO OPTIMIZE",
+                              description:
+                                  "Creeping for female light years that lesser can't evening heaven isn't bearing tree",
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),
@@ -385,8 +455,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                         children: [
                           'HOME',
                           'ABOUT',
-                          'SERVICES',
                           'PORTFOLIO',
+                          'SERVICES',
                           'BLOG',
                           'CONTACT'
                         ]
@@ -400,8 +470,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                                       _scrollToSection(_homeSectionKey);
                                     } else if (text == 'ABOUT') {
                                       _scrollToSection(_aboutSectionKey);
+                                    } else if (text == 'PORTFOLIO') {
+                                      _scrollToSection(_fourthSectionKey);
                                     } else if (text == 'SERVICES') {
-                                      _scrollToSection(_thirdSectionKey);
+                                      _scrollToSection(_serviceSectionKey);
                                     }
                                   },
                                   child: Text(
@@ -443,8 +515,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           boxShadow: [
             BoxShadow(
               color: Colors.grey.shade300,
-              blurRadius: 8,
-              offset: Offset(0, 4),
+              blurRadius: 100,
+              offset: Offset(10, 5),
             ),
           ],
         ),
@@ -459,6 +531,91 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildServiceTile({
+    required IconData icon,
+    required String title,
+    required String description,
+  }) {
+    return StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+        bool isHovered = false;
+
+        return MouseRegion(
+          onEnter: (_) {
+            setState(() => isHovered = true);
+          },
+          onExit: (_) {
+            setState(() => isHovered = false);
+          },
+          child: Material(
+            color: Colors.white,
+            elevation: isHovered ? 100 : 0, // Dynamic elevation based on hover
+            // borderRadius: BorderRadius.circular(12),
+            child: InkWell(
+              onTap: () {
+                print("Clicked on $title");
+              },
+              hoverColor: Colors.purple.shade50,
+              borderRadius: BorderRadius.circular(12),
+              child: Card(
+                elevation: isHovered ? 100 : 0,
+                child: Container(
+                  padding: const EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    boxShadow: isHovered
+                        ? [
+                            BoxShadow(
+                              color: Colors.grey.shade300,
+                              // blurRadius: 20,
+                              offset: Offset(10, 5),
+                            )
+                          ]
+                        : [
+                            BoxShadow(
+                              color: Colors.grey.shade100,
+                              // blurRadius: 10,
+                              offset: Offset(4, 2),
+                            )
+                          ],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        icon,
+                        size: 50,
+                        color: Colors.purple,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        description,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey[600],
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
