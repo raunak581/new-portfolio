@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import "package:hovering/hovering.dart";
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class PortfolioScreen extends StatefulWidget {
   @override
@@ -32,11 +34,21 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQueryPadding = MediaQuery.of(context).padding;
+    final _height = MediaQuery.of(context).size.height;
+
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
-      body: SafeArea(
+      body: Padding(
+        padding:
+            EdgeInsets.only(top: -mediaQueryPadding.top), // Remove top padding
         child: Stack(
+          fit: StackFit.expand,
           children: [
+            //      Container(
+            //   color: Colors.red, // Visualize the entire area
+            // ),
             SingleChildScrollView(
               controller: _scrollController,
               child: Column(
@@ -45,183 +57,192 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   // Header with navigation
 
                   // Main Content
-                  Padding(
+                  Container(
                     key: _homeSectionKey,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 60, vertical: 100),
+                    height: _height,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 60, vertical: 100),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          // Left Section: Text Content
+                          Expanded(
+                            flex: 4,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "HELLO",
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                const Text(
+                                  "I AM RAUNAK DUBEY",
+                                  style: TextStyle(
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.2,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                const Text(
+                                  "JUNIOUR APPLICATION DEVELOPER",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 30),
+                                Row(
+                                  children: [
+                                    // Hire Me Button
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.purple,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 15, horizontal: 30),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                      ),
+                                      onPressed: () {},
+                                      child: const Text(
+                                        "HIRE ME",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 20),
+                                    // Get CV Button
+                                    OutlinedButton(
+                                      style: OutlinedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 15, horizontal: 30),
+                                        side: const BorderSide(
+                                            color: Colors.purple),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                      ),
+                                      onPressed: () {},
+                                      child: const Text(
+                                        "GET CV",
+                                        style: TextStyle(color: Colors.purple),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          // Right Section: Image
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              height: 400,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/home-right.png"),
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    key: _aboutSectionKey,
+                    height: _height,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Left Section: Text Content
+                        // Left Side: Illustration
                         Expanded(
-                          flex: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "HELLO",
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              const Text(
-                                "I AM RAUNAK DUBEY",
-                                style: TextStyle(
-                                  fontSize: 50,
-                                  fontWeight: FontWeight.bold,
-                                  height: 1.2,
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              const Text(
-                                "JUNIOUR APPLICATION DEVELOPER",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 30),
-                              Row(
-                                children: [
-                                  // Hire Me Button
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.purple,
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 15, horizontal: 30),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                    ),
-                                    onPressed: () {},
-                                    child: const Text(
-                                      "HIRE ME",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  // Get CV Button
-                                  OutlinedButton(
-                                    style: OutlinedButton.styleFrom(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 15, horizontal: 30),
-                                      side: const BorderSide(
-                                          color: Colors.purple),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                    ),
-                                    onPressed: () {},
-                                    child: const Text(
-                                      "GET CV",
-                                      style: TextStyle(color: Colors.purple),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        // Right Section: Image
-                        Expanded(
-                          flex: 3,
+                          flex: 2,
                           child: Container(
                             height: 400,
                             decoration: const BoxDecoration(
                               image: DecorationImage(
-                                image:
-                                    AssetImage("assets/images/home-right.png"),
+                                image: AssetImage(
+                                    "assets/images/about-us.png"), // Replace with your asset
                                 fit: BoxFit.contain,
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-
-                  Row(
-                    key: _aboutSectionKey,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Left Side: Illustration
-                      Expanded(
-                        flex: 2,
-                        child: Container(
-                          height: 400,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  "assets/images/about-us.png"), // Replace with your asset
-                              fit: BoxFit.contain,
+                        // Right Side: Text Content
+                        Expanded(
+                          flex: 3,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 40),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // Title
+                                const Text(
+                                  "LET'S INTRODUCE ABOUT MYSELF",
+                                  style: TextStyle(
+                                    fontSize: 36,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.2,
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                // Description Text
+                                const Text(
+                                  "I’m a passionate Flutter Developer with a knack for creating visually stunning and high-performing cross-platform mobile applications. My expertise lies in building seamless user experiences with clean code and modern UI/UX principles..\n\n"
+                                  "With a strong foundation in Dart and the Flutter framework, I excel at transforming ideas into functional, user-friendly apps that run flawlessly on both iOS and Android platforms.",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black54,
+                                    height: 1.5,
+                                  ),
+                                ),
+                                const SizedBox(height: 30),
+                                // Button: Download CV
+                                
+                                SizedBox(
+                                  width: 200,
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.purple,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      // Action here
+                                    },
+                                    child: const Text(
+                                      "DOWNLOAD CV",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      ),
-                      // Right Side: Text Content
-                      Expanded(
-                        flex: 3,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 40),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // Title
-                              const Text(
-                                "LET'S INTRODUCE ABOUT MYSELF",
-                                style: TextStyle(
-                                  fontSize: 36,
-                                  fontWeight: FontWeight.bold,
-                                  height: 1.2,
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              // Description Text
-                              const Text(
-                                "I’m a passionate Flutter Developer with a knack for creating visually stunning and high-performing cross-platform mobile applications. My expertise lies in building seamless user experiences with clean code and modern UI/UX principles..\n\n"
-                                "With a strong foundation in Dart and the Flutter framework, I excel at transforming ideas into functional, user-friendly apps that run flawlessly on both iOS and Android platforms.",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black54,
-                                  height: 1.5,
-                                ),
-                              ),
-                              const SizedBox(height: 30),
-                              // Button: Download CV
-                              SizedBox(
-                                width: 200,
-                                height: 50,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.purple,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    // Action here
-                                  },
-                                  child: const Text(
-                                    "DOWNLOAD CV",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 50,
@@ -229,15 +250,15 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
                   //third section
                   Padding(
-                    key: _fourthSectionKey,
                     padding: const EdgeInsets.symmetric(
                         vertical: 40, horizontal: 60),
                     child: Row(
+                      key: _fourthSectionKey,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         // Left Side: GridView with logos
                         Expanded(
-                          flex: 3,
+                          flex: 4,
                           child: GridView.count(
                             crossAxisCount: 3,
                             crossAxisSpacing: 20,
@@ -257,7 +278,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                         SizedBox(width: 30),
                         // Right Side: Experience and Phone Box
                         Expanded(
-                          flex: 2,
+                          flex: 3,
                           child: Container(
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
@@ -331,6 +352,18 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
+                                    SpinKitCircle(
+                                      color: Colors.purple,
+                                      size: 50.0,
+                                    ),
+                                    SpinKitWave(
+                                      color: Colors.green,
+                                      size: 50.0,
+                                    ),
+                                    SpinKitFadingCube(
+                                      color: Colors.red,
+                                      size: 50.0,
+                                    )
                                   ],
                                 ),
                               ],
@@ -340,95 +373,108 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Column(
+                  // SizedBox(
+                  //   height: 100,
+                  // ),
+
+                  Container(
                     key: _serviceSectionKey,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // Title Section
-                      Text(
-                        "SERVICES OFFERS",
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "Is give may shall likeness made yielding spirit a itself togeth created after sea\n"
-                        "is in beast beginning signs open god you're gathering ithe",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20, color: Colors.grey),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      // Grid Section
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: GridView.count(
-                          crossAxisCount:
-                              4, // Adjust based on the number of columns
-                          crossAxisSpacing: 16,
-                          mainAxisSpacing: 16,
-                          shrinkWrap:
-                              true, // Ensures the GridView doesn't expand infinitely
-                          physics:
-                              NeverScrollableScrollPhysics(), // Disables scrolling
-                          children: [
-                            _buildServiceTile(
-                              icon: Icons.mouse,
-                              title: "WP DEVELOPING",
-                              description:
-                                  "Creeping for female light years that lesser can't evening heaven isn't bearing tree",
-                            ),
-                            _buildServiceTile(
-                              icon: Icons.design_services,
-                              title: "UI/UX DESIGN",
-                              description:
-                                  "Creeping for female light years that lesser can't evening heaven isn't bearing tree",
-                            ),
-                            _buildServiceTile(
-                              icon: Icons.web,
-                              title: "WEB DESIGN",
-                              description:
-                                  "Creeping for female light years that lesser can't evening heaven isn't bearing tree",
-                            ),
-                            _buildServiceTile(
-                              icon: Icons.rocket_launch,
-                              title: "SEO OPTIMIZE",
-                              description:
-                                  "Creeping for female light years that lesser can't evening heaven isn't bearing tree",
-                            ),
-                          ],
+                    height: _height,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 100,
                         ),
-                      ),
-                    ],
-                  )
+                        // Title Section
+                        Text(
+                          "SERVICES OFFERS",
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          "Is give may shall likeness made yielding spirit a itself togeth created after sea\n"
+                          "is in beast beginning signs open god you're gathering ithe",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20, color: Colors.grey),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        // Grid Section
+                        Container(
+                          // height: MediaQuery.sizeOf(context).height,
+                          // width: 100,
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: GridView.count(
+                            crossAxisCount:
+                                4, // Adjust based on the number of columns
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 16,
+                            shrinkWrap:
+                                true, // Ensures the GridView doesn't expand infinitely
+                            physics:
+                                NeverScrollableScrollPhysics(), // Disables scrolling
+                            children: [
+                              _buildServiceTile(
+                                icon: Icons.mouse,
+                                title: "WP DEVELOPING",
+                                description:
+                                    "Creeping for female light years that lesser can't evening heaven isn't bearing tree",
+                              ),
+                              _buildServiceTile(
+                                icon: Icons.design_services,
+                                title: "UI/UX DESIGN",
+                                description:
+                                    "Creeping for female light years that lesser can't evening heaven isn't bearing tree",
+                              ),
+                              _buildServiceTile(
+                                icon: Icons.web,
+                                title: "WEB DESIGN",
+                                description:
+                                    "Creeping for female light years that lesser can't evening heaven isn't bearing tree",
+                              ),
+                              _buildServiceTile(
+                                icon: Icons.rocket_launch,
+                                title: "SEO OPTIMIZE",
+                                description:
+                                    "Creeping for female light years that lesser can't evening heaven isn't bearing tree",
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // SizedBox(
+                  //   height: 50,
+                  // )
                 ],
               ),
             ),
             Positioned(
-              top: 0,
+              top: MediaQuery.of(context).padding.top,
               left: 0,
               right: 0,
               child: SafeArea(
+                top: false,
                 // Ensures it touches the top, including status bar
                 child: Container(
                   decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white,
-                        // blurRadius: 4,
-                        offset: Offset(0, 4),
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.white,
+                      //     // blurRadius: 4,
+                      //     offset: Offset(0, 4),
+                      //   ),
+                      // ],
                       ),
-                    ],
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   height: 80,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -457,13 +503,12 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                           'ABOUT',
                           'PORTFOLIO',
                           'SERVICES',
-                          'BLOG',
                           'CONTACT'
                         ]
                             .map(
                               (text) => Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 child: TextButton(
                                   onPressed: () {
                                     if (text == 'HOME') {
@@ -501,7 +546,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
   Widget _buildCard(String title) {
     return Card(
-      elevation: 2,
+      elevation: 10,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -539,83 +584,60 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
     required String title,
     required String description,
   }) {
-    return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
-        bool isHovered = false;
-
-        return MouseRegion(
-          onEnter: (_) {
-            setState(() => isHovered = true);
-          },
-          onExit: (_) {
-            setState(() => isHovered = false);
-          },
-          child: Material(
-            color: Colors.white,
-            elevation: isHovered ? 100 : 0, // Dynamic elevation based on hover
-            // borderRadius: BorderRadius.circular(12),
-            child: InkWell(
-              onTap: () {
-                print("Clicked on $title");
-              },
-              hoverColor: Colors.purple.shade50,
-              borderRadius: BorderRadius.circular(12),
-              child: Card(
-                elevation: isHovered ? 100 : 0,
-                child: Container(
-                  padding: const EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    boxShadow: isHovered
-                        ? [
-                            BoxShadow(
-                              color: Colors.grey.shade300,
-                              // blurRadius: 20,
-                              offset: Offset(10, 5),
-                            )
-                          ]
-                        : [
-                            BoxShadow(
-                              color: Colors.grey.shade100,
-                              // blurRadius: 10,
-                              offset: Offset(4, 2),
-                            )
-                          ],
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        icon,
-                        size: 50,
-                        color: Colors.purple,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        description,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey[600],
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+    return HoverContainer(
+      width: 200, // Adjust as needed
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Colors.grey.shade100,
+        //     blurRadius: 5,
+        //     offset: Offset(4, 2),
+        //   ),
+        // ],
+      ),
+      hoverDecoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade300,
+            blurRadius: 10,
+            offset: Offset(0, 0),
           ),
-        );
-      },
+        ],
+      ),
+      // onTap: () => print("Clicked on $title"),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 50,
+            color: Colors.purple,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            description,
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.grey[600],
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }
